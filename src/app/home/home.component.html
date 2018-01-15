@@ -1,0 +1,23 @@
+<div class="py-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="list-group justify-content-center border border-light">
+          <a href="" class="list-group-item flex-column align-items-start border border-light">
+            <img class="img-fluid d-block mx-auto" src="https://image.ibb.co/j4Xw7R/Charini_Yasith.png"> </a>
+          <div class="btn-group justify-content-center align-items-center align-self-center">
+            <a class="btn btn-outline-success text-success" (click)="onAccept()">Accept</a>
+            <a class="btn btn-outline-danger text-danger" (click)="onReject()">Reject</a>
+          </div>
+          <a href="" class="list-group-item list-group-item-action flex-column align-items-center justify-content-center align-self-center border border-light">
+            <p class="justify-content-center align-items-center align-self-center text-center text-secondary"> RSVP (REGRETS ONLY)
+              <br> CHARINI 0714126293
+              <br> YASITH 0771353682
+            </p>
+            <ngb-alert *ngIf="successMessage" type="warning" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
