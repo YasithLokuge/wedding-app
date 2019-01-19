@@ -5,6 +5,7 @@ import { HomeComponent } from './home/home.component';
 import {approutes} from './app.routes';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {HomeService} from './home/home.service';
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import {HomeService} from './home/home.service';
   imports: [
     approutes,
     BrowserModule,
+    HttpClientModule,
     NgbModule.forRoot()
   ],
   providers: [

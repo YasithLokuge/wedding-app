@@ -11,6 +11,10 @@ import {HomeService} from './home.service';
 export class HomeComponent implements OnInit {
 
   private _success = new Subject<string>();
+  public name: string;
+  public table: string;
+  public error: boolean = true;
+  private id: string;
 
   staticAlertClosed = false;
   successMessage: string;
@@ -21,10 +25,21 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.activatedRoute.queryParams.subscribe((params: Params) => {
-      const id = params['id'];
-      if (id != null && typeof id !== 'undefined') {
-        this.homeService.setId(id);
+      this.id = params['id'];
+      if (this.id != null && typeof this.id !== 'undefined') {
+        this.homeService.setId(this.id);
         console.log('id is not empty : ' + this.homeService.getId());
+        this.homeService.getData(this.id).subscribe(
+          response => {
+            console.log(response.status);
+            if(response){
+              this.error = false;
+            }
+            this.name = response.name;
+            this.table = response.table;
+            this.homeService.markAttendance(this.name);
+          }
+        );
       }else {
         console.log('id is empty');
       }
@@ -35,11 +50,13 @@ export class HomeComponent implements OnInit {
   }
 
   onAccept() {
+    this.homeService.acceptInvitation(this.name, this.table);
     console.log('accepted');
     this._success.next('Thank You! Looking forward to see you on our special day');
   }
 
   onReject() {
+    this.homeService.rejectInvitation(this.name, this.table);
     console.log('rejected');
     this._success.next('Thank You! Your response has been recorded');
   }
